@@ -4,19 +4,18 @@ using UnityEngine.EventSystems;
 
 public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
 {
-    [SerializeField] private PlacedObjectTypeSO currentPlacedObjectType;
+    [SerializeField] private GameObject selectedObject;
     [SerializeField] private RectTransform backgroundRectTransform;
     [SerializeField] private GenericEventChannelSO objectTobeDraggedEventChannel;
 
     private RectTransform draggingObjectRectTransform;
-    private Vector3 velocity = Vector3.zero;
-    private Vector3 originalPosition; 
-    private float dampingSpeed = 0f;
+    private Vector3 originalPosition;
 
     private void Start()
     {
         draggingObjectRectTransform = GetComponent<RectTransform>();
-        originalPosition = draggingObjectRectTransform.position;
+        originalPosition = draggingObjectRectTransform.anchoredPosition;
+        Debug.Log(originalPosition);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -24,21 +23,15 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
         if (RectTransformUtility.ScreenPointToWorldPointInRectangle(draggingObjectRectTransform,
                 eventData.position, eventData.pressEventCamera, out var globalMousePosition))
         {
-            Vector3 targetPosition = Vector3.SmoothDamp(
-                draggingObjectRectTransform.position,
-                globalMousePosition,
-                ref velocity,
-                dampingSpeed
-            );
-
-            draggingObjectRectTransform.position = targetPosition;
+            
+            draggingObjectRectTransform.position = globalMousePosition;
 
             // Check if the mouse is not hovering over the background
             if (!IsMouseOverBackground())
             {
                 // Handle the situation when the mouse is not over the background
                 Debug.Log("Mouse is not hovering over the background.");
-                objectTobeDraggedEventChannel.RaiseEvent(currentPlacedObjectType);
+                objectTobeDraggedEventChannel.RaiseEvent(selectedObject);
             }
         }
     }
@@ -46,7 +39,7 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
     public void OnEndDrag(PointerEventData eventData)
     {
         // Reset the position to the original position when dragging ends.
-        draggingObjectRectTransform.position = originalPosition;
+        draggingObjectRectTransform.anchoredPosition = originalPosition;
     }
 
     private bool IsMouseOverBackground()
@@ -73,6 +66,6 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
 
     private void OnDisable()
     {
-        draggingObjectRectTransform.position = originalPosition;
+        draggingObjectRectTransform.anchoredPosition = originalPosition;
     }
 }

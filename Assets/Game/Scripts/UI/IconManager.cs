@@ -3,18 +3,20 @@ using UnityEngine.UI;
 
 public class IconManager : MonoBehaviour
 {
-    public GameObject[] icons; // Reference to your existing icon buttons
-    private int currentlyActiveIconIndex = -1;
+    public GameObject[] icons;
+    public GameObject followIcon; 
+    
+    public float speed = 5f; 
 
-    // Start is called before the first frame update
+    private bool isFollowing;
+    private int targetIndex;
+
     void Start()
     {
-        // Attach a click handler to each existing icon
         for (int i = 0; i < icons.Length; i++)
         {
-            int index = i; // Capture the current value of i in the closure
-
-            // Assuming the icons have a Button component or similar for interaction
+            int index = i; 
+            
             Button iconButton = icons[i].GetComponent<Button>();
             if (iconButton != null)
             {
@@ -23,23 +25,30 @@ public class IconManager : MonoBehaviour
         }
     }
 
-    // Handle icon button click
-    void OnIconButtonClick(int clickedIndex)
+    void Update()
     {
-        // Deactivate the children of the previously clicked icon
-        if (currentlyActiveIconIndex != -1)
+        if (isFollowing)
         {
-            SetIconChildrenActiveState(icons[currentlyActiveIconIndex], false);
+            Vector3 movementPos = Vector3.Lerp(followIcon.transform.position, icons[targetIndex].transform.position, Time.deltaTime * speed);
+            followIcon.transform.position = new Vector3(movementPos.x, followIcon.transform.position.y,
+                followIcon.transform.position.z);
         }
-
-        // Activate the children of the currently clicked icon
-        SetIconChildrenActiveState(icons[clickedIndex], true);
-
-        // Update the currently active icon index
-        currentlyActiveIconIndex = clickedIndex;
     }
 
-    // Activate or deactivate the children of an icon
+    void OnIconButtonClick(int clickedIndex)
+    {
+        SetIconChildrenActiveState(icons[clickedIndex], true);
+        
+        targetIndex = clickedIndex;
+        isFollowing = true;
+
+        for (int i = 0; i < icons.Length; i++)
+        {
+            if (i == clickedIndex) continue;
+            SetIconChildrenActiveState(icons[i], false);
+        }
+    }
+
     void SetIconChildrenActiveState(GameObject icon, bool activate)
     {
         foreach (Transform child in icon.transform)

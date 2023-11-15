@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4782235985580720506}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -32,7 +32,7 @@ Transform:
   - {fileID: 6985744520233598923}
   - {fileID: 7619765717690252456}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1001 &4456178973367624765
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44,6 +44,10 @@ PrefabInstance:
     - target: {fileID: 6082497938603607221, guid: 33f206f2de18dd748a43ba6f7d2d07f7, type: 3}
       propertyPath: m_Name
       value: building-temple-china
+      objectReference: {fileID: 0}
+    - target: {fileID: 6082497938603607221, guid: 33f206f2de18dd748a43ba6f7d2d07f7, type: 3}
+      propertyPath: m_TagString
+      value: ConstructObject
       objectReference: {fileID: 0}
     - target: {fileID: 6082497938603645077, guid: 33f206f2de18dd748a43ba6f7d2d07f7, type: 3}
       propertyPath: m_LocalScale.x
@@ -100,13 +104,88 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6082497938603607221, guid: 33f206f2de18dd748a43ba6f7d2d07f7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6353019321033723809}
+    - targetCorrespondingSourceObject: {fileID: 6082497938603607221, guid: 33f206f2de18dd748a43ba6f7d2d07f7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7798507656551226869}
+    - targetCorrespondingSourceObject: {fileID: 6082497938603607221, guid: 33f206f2de18dd748a43ba6f7d2d07f7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4068260734388733779}
   m_SourcePrefab: {fileID: 100100000, guid: 33f206f2de18dd748a43ba6f7d2d07f7, type: 3}
 --- !u!4 &7619765717690252456 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6082497938603645077, guid: 33f206f2de18dd748a43ba6f7d2d07f7, type: 3}
   m_PrefabInstance: {fileID: 4456178973367624765}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7619765717690736776 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6082497938603607221, guid: 33f206f2de18dd748a43ba6f7d2d07f7, type: 3}
+  m_PrefabInstance: {fileID: 4456178973367624765}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &6353019321033723809
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7619765717690736776}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &7798507656551226869
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7619765717690736776}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 17.800001, y: 17.499996, z: 17.8}
+  m_Center: {x: 0, y: 8.749998, z: 0}
+--- !u!114 &4068260734388733779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7619765717690736776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8e7c4fb2e75e748b4a738022154d15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isColliding: 0
 --- !u!1001 &4782235985394613219
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -118,10 +197,6 @@ PrefabInstance:
     - target: {fileID: 1456656668474129271, guid: 24602e9b848b1d040bf7e2b4f47f2d19, type: 3}
       propertyPath: m_Name
       value: BuildingVisual
-      objectReference: {fileID: 0}
-    - target: {fileID: 2499414142690952232, guid: 24602e9b848b1d040bf7e2b4f47f2d19, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2499414142690952232, guid: 24602e9b848b1d040bf7e2b4f47f2d19, type: 3}
       propertyPath: m_LocalPosition.x
